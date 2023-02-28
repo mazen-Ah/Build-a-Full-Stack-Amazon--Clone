@@ -1,8 +1,8 @@
-import { createContext, useContext, useReducer, useState } from "react";
+import { createContext, useContext, useReducer } from "react";
 import AppReducer from "./AppReducer";
 import { initialState } from "./AppReducer";
-const GlobalContext = createContext();
-const GlobalState = ({ children }) => {
+export const GlobalContext = createContext();
+const GlobalProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AppReducer, initialState);
   return (
     <GlobalContext.Provider
@@ -12,7 +12,7 @@ const GlobalState = ({ children }) => {
     </GlobalContext.Provider>
   );
 };
-export default GlobalState;
 export const useAuth = () => {
-  useContext(GlobalContext);
+  return useContext(GlobalContext);
 };
+export default GlobalProvider;
