@@ -8,6 +8,7 @@ import ProductImg3 from "../images/products/3.png";
 import ProductImg4 from "../images/products/4.png";
 import ProductImg5 from "../images/products/5.png";
 import ProductImg6 from "../images/products/6.png";
+import { useAuth } from "../context/GlobalState";
 const Home = () => {
   return (
     <div className="">

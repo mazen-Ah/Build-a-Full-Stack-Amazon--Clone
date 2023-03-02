@@ -1,5 +1,8 @@
 import React, { useContext, useState } from "react";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import { auth } from "../firebase";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/GlobalState";
@@ -19,6 +22,14 @@ const Login = () => {
       .catch((error) => {
         console.log(error?.message);
       });
+  };
+  const signIn = (e) => {
+    e.preventDefault();
+    signInWithEmailAndPassword(auth, email, password).then((auth) => {
+      if (auth) {
+        navigate("/");
+      }
+    });
   };
   console.log(user);
   return (
@@ -50,6 +61,7 @@ const Login = () => {
           <button
             className="w-full my-4  py-1 bg-[#CD9042] border border-[#111]"
             type="submit"
+            onClick={signIn}
           >
             Sign in
           </button>

@@ -1,10 +1,25 @@
 import React from "react";
+import { useAuth } from "../context/GlobalState";
 
 const Product = ({ title, price, image, rating, id }) => {
-  let rr = Array(rating).fill();
-  console.log(rr);
+  const { dispatch, basket } = useAuth();
+  const addToBasket = () => {
+    dispatch({
+      type: "ADD_TO_BASKET",
+      item: {
+        title,
+        price,
+        image,
+        rating,
+        id,
+      },
+    });
+  };
   return (
     <div className="bg-white m-4 p-5 w-full hover:scale-110 transition-all grid items-center justify-center">
+      <div className="grid items-center justify-center">
+        <img className="max-h-52" src={image} alt="product-image" />
+      </div>
       <div className="grid items-center  ">
         <p className="text-xl font-normal">{title}</p>
         <p className="text-2xl">
@@ -34,10 +49,11 @@ const Product = ({ title, price, image, rating, id }) => {
             })}
         </p>
       </div>
-      <div className="grid items-center justify-center">
-        <img className="max-h-52" src={image} alt="product-image" />
-      </div>
-      <button className="bg-[#CD9042] w-1/2 h-8 mx-auto max-w-xs active:scale-[0.8] transition-all">
+
+      <button
+        onClick={addToBasket}
+        className="bg-[#CD9042] font-semibold mt-2 w-1/2 h-8 mx-auto max-w-xs active:scale-[0.8] transition-all"
+      >
         Add to Basket
       </button>
     </div>
